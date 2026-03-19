@@ -1215,3 +1215,32 @@ tbody td {
   .login-card { padding: 28px 20px; }
   .user-info-header { display: none; }
 }
+
+/* =============================================
+   SAAF v3.0 — Estilos adicionales
+   ============================================= */
+
+/* Chip para Determinativas */
+.chip-determinativa { background: #FDE8F0; color: #9B1B5A; }
+
+/* Badge "Pendiente de Recepción por Archivo" */
+.badge-pendiente-recepcion {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: var(--radio);
+  font-size: 13px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #FEF9E7, #FFFDE7);
+  border: 2px dashed var(--dorado);
+  color: #876A18;
+  cursor: default;
+}
+
+/* Tabla de stats por tipo en dashboard */
+#stats-por-tipo table { border-radius: var(--radio); overflow: hidden; }
+#stats-por-tipo tbody tr:hover { background: var(--verde-suave) !important; cursor: pointer; }
+
+/* Badge estado remitido en tabla remisiones */
+.badge-en-destino { background: #E0F7FA; color: var(--teal); border: 1px solid #B2EBF2; }
