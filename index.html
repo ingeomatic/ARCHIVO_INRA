@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,547 +7,461 @@
   <link rel="stylesheet" href="saaf_styles.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-
 <body>
 
-  <!-- ===================== PANTALLA DE LOGIN ===================== -->
-  <div id="login-screen">
-    <div class="login-card">
-      <div class="login-logo">
-        <div id="login-logo-wrap"
-          style="width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#ffffff,#edf1ed);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 4px 16px rgba(9,86,9,0.35);overflow:hidden;">
-          <img src="logo_inra.png" alt="INRA" id="logo-login-img"
-            style="width:100%;height:100%;object-fit:contain;padding:6px;"
-            onerror="this.style.display='none'; document.getElementById('logo-login-emoji').style.display='flex';">
-          <span id="logo-login-emoji"
-            style="display:none;font-size:34px;align-items:center;justify-content:center;">🌿</span>
-        </div>
-        <div class="logo-subtitulo">Instituto Nacional de Reforma Agraria</div>
-        <div class="logo-subtitulo">Estado Plurinacional de Bolivia</div>
+<!-- ===================== PANTALLA DE LOGIN ===================== -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div id="login-logo-wrap" style="width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#ffffff,#edf1ed);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 4px 16px rgba(9,86,9,0.35);overflow:hidden;">
+        <img src="logo_inra.png" alt="INRA" id="logo-login-img"
+             style="width:100%;height:100%;object-fit:contain;padding:6px;"
+             onerror="this.style.display='none'; document.getElementById('logo-login-emoji').style.display='flex';">
+        <span id="logo-login-emoji" style="display:none;font-size:34px;align-items:center;justify-content:center;">🌿</span>
       </div>
-
-      <div class="login-titulo">
-        <h2>DGATF</h2>
-        <p>Sistema de Administración de Archivos</p>
-        <p style="font-size:11px;color:#888;margin-top:4px;">Dirección General de Administración de Tierras Fiscales</p>
-      </div>
-
-      <div id="login-error" class="login-error">
-        ⚠️ Usuario o contraseña incorrectos. Intente nuevamente.
-      </div>
-
-      <form id="login-form">
-        <div class="form-group">
-          <label>Usuario</label>
-          <input type="text" id="login-user" placeholder="Ej: NOMBRE.APELLIDO" autocomplete="username" required>
-        </div>
-        <div class="form-group">
-          <label>Contraseña</label>
-          <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password" required>
-        </div>
-        <button type="submit" class="btn btn-primary">🔐 Ingresar al Sistema</button>
-      </form>
-
-      <p style="text-align:center;margin-top:20px;font-size:11px;color:#aaa;">
-        INRA Bolivia © 2026 · Uso exclusivo del personal autorizado
-      </p>
+      <div class="logo-text-inra">INRA</div>
+      <div class="logo-subtitulo">Instituto Nacional de Reforma Agraria</div>
+      <div class="logo-subtitulo">Estado Plurinacional de Bolivia</div>
     </div>
+    <div class="login-titulo">
+      <h2>SAAF</h2>
+      <p>Sistema de Administración de Archivos</p>
+      <p style="font-size:11px;color:#888;margin-top:4px;">Dirección General de Administración de Tierras Fiscales</p>
+    </div>
+    <div id="login-error" class="login-error">⚠️ Usuario o contraseña incorrectos. Intente nuevamente.</div>
+    <form id="login-form">
+      <div class="form-group">
+        <label>Usuario</label>
+        <input type="text" id="login-user" placeholder="Ej: ROMULO.CORDERO" autocomplete="username" required>
+      </div>
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">🔐 Ingresar al Sistema</button>
+    </form>
+    <p style="text-align:center;margin-top:20px;font-size:11px;color:#aaa;">INRA Bolivia © 2026 · Uso exclusivo del personal autorizado</p>
   </div>
+</div>
 
-  <!-- ===================== APLICACIÓN PRINCIPAL ===================== -->
-  <div id="app-screen" style="display:none;flex-direction:column;min-height:100vh;">
+<!-- ===================== APLICACIÓN PRINCIPAL ===================== -->
+<div id="app-screen" style="display:none;flex-direction:column;min-height:100vh;">
 
-    <!-- HEADER -->
-    <header class="header">
-      <div class="header-logo">
-        <div class="logo-placeholder" title="Clic para cambiar logo">
-          <img src="logo_inra.png" alt="INRA" id="header-logo-img"
-            style="width:100%;height:100%;object-fit:contain;padding:3px;"
-            onerror="this.style.display='none';document.getElementById('header-logo-emoji').style.display='block';">
-          <span id="header-logo-emoji" style="display:none;font-size:20px;">🌿</span>
-          <input type="file" accept="image/*" onchange="cambiarLogo(this)" title="Cambiar logo">
-        </div>
-        <div class="header-logo-texto">
-          <h1>SISTEMA DE ADMINISTRACIÓN DE ARCHIVOS </h1>
-          <span>DIRECCIÓN GENERAL DE ADMINISTRACIÓN DE TIERRAS FISCALES · INRA</span>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-logo">
+      <div class="logo-placeholder" title="Clic para cambiar logo">
+        <img src="logo_inra.png" alt="INRA" id="header-logo-img"
+             style="width:100%;height:100%;object-fit:contain;padding:3px;"
+             onerror="this.style.display='none';document.getElementById('header-logo-emoji').style.display='block';">
+        <span id="header-logo-emoji" style="display:none;font-size:20px;">🌿</span>
+        <input type="file" accept="image/*" onchange="cambiarLogo(this)" title="Cambiar logo">
+      </div>
+      <div class="header-logo-texto">
+        <h1>SISTEMA DE ADMINISTRACIÓN DE ARCHIVOS — SAAF</h1>
+        <span>DIRECCIÓN GENERAL DE ADMINISTRACIÓN DE TIERRAS FISCALES · INRA</span>
+      </div>
+    </div>
+    <div class="header-user">
+      <div class="user-badge">
+        <div class="user-avatar" id="header-avatar">U</div>
+        <div class="user-info-header">
+          <div class="nombre" id="header-nombre">—</div>
+          <span class="tipo" id="header-tipo">—</span>
         </div>
       </div>
-      <div class="header-user">
-        <div class="user-badge">
-          <div class="user-avatar" id="header-avatar">U</div>
-          <div class="user-info-header">
-            <div class="nombre" id="header-nombre">—</div>
-            <span class="tipo" id="header-tipo">—</span>
-          </div>
+      <button class="btn-logout" onclick="logout()">⬅️ Salir</button>
+    </div>
+  </header>
+
+  <!-- NAVEGACIÓN -->
+  <nav class="nav-tabs">
+    <button class="nav-tab active" data-tab="dashboard" onclick="cambiarTab('dashboard')">🏠 Dashboard</button>
+    <button class="nav-tab" data-tab="inventario" onclick="cambiarTab('inventario')">📚 Inventario</button>
+
+    <!-- Solo ARCHIVO -->
+    <button class="nav-tab tab-solo-archivo" data-tab="solicitudes-archivo" onclick="cambiarTab('solicitudes-archivo')" style="display:none;">
+      📤 Solicitudes <span class="nav-badge" id="badge-pendientes" style="display:none;">0</span>
+    </button>
+    <button class="nav-tab tab-solo-archivo" data-tab="nuevos-archivo" onclick="cambiarTab('nuevos-archivo')" style="display:none;">
+      📦 Nuevos Exp. <span class="nav-badge" id="badge-nuevos" style="display:none;">0</span>
+    </button>
+    <button class="nav-tab tab-solo-archivo" data-tab="devoluciones" onclick="cambiarTab('devoluciones')" style="display:none;">
+      📥 Devoluciones <span class="nav-badge" id="badge-devoluciones" style="display:none;">0</span>
+    </button>
+
+    <!-- Solo ACTIVO -->
+    <button class="nav-tab tab-solo-activo" data-tab="mis-solicitudes" onclick="cambiarTab('mis-solicitudes')" style="display:none;">
+      ⏳ Mis Solicitudes <span class="nav-badge" id="badge-mis-solicitudes" style="display:none;">0</span>
+    </button>
+    <button class="nav-tab tab-solo-activo" data-tab="mis-prestamos" onclick="cambiarTab('mis-prestamos')" style="display:none;">📋 Mis Préstamos</button>
+    <button class="nav-tab tab-solo-activo" data-tab="nuevo-expediente" onclick="cambiarTab('nuevo-expediente')" style="display:none;">➕ Nuevo Expediente</button>
+
+    <!-- Ambos -->
+    <button class="nav-tab" data-tab="remisiones" onclick="cambiarTab('remisiones')">📨 Remisiones</button>
+    <button class="nav-tab" data-tab="historial" onclick="cambiarTab('historial')">🕒 Historial</button>
+    <button class="nav-tab" data-tab="reportes" onclick="cambiarTab('reportes')">📊 Reportes</button>
+  </nav>
+
+  <!-- CONTENIDO -->
+  <main class="main-content">
+
+    <!-- ========== DASHBOARD ========== -->
+    <div class="tab-content active" id="tab-dashboard">
+      <!-- Stats principales -->
+      <div class="stats-grid">
+        <div class="stat-card total">
+          <div class="stat-icon">📂</div>
+          <div class="stat-info"><div class="numero" id="stat-total">—</div><div class="etiqueta">Total Expedientes</div></div>
         </div>
-        <button class="btn-logout" onclick="logout()">⬅️ Salir</button>
-      </div>
-    </header>
-
-    <!-- NAVEGACIÓN -->
-    <nav class="nav-tabs">
-      <button class="nav-tab active" data-tab="dashboard" onclick="cambiarTab('dashboard')">🏠 Dashboard</button>
-      <button class="nav-tab" data-tab="inventario" onclick="cambiarTab('inventario')">📚 Inventario</button>
-
-      <!-- Solo ARCHIVO -->
-      <button class="nav-tab tab-solo-archivo" data-tab="solicitudes-archivo"
-        onclick="cambiarTab('solicitudes-archivo')" style="display:none;">
-        📤 Solicitudes <span class="nav-badge" id="badge-pendientes" style="display:none;">0</span>
-      </button>
-      <button class="nav-tab tab-solo-archivo" data-tab="nuevos-archivo" onclick="cambiarTab('nuevos-archivo')"
-        style="display:none;">
-        📦 Nuevos Exp. <span class="nav-badge" id="badge-nuevos" style="display:none;">0</span>
-      </button>
-      <button class="nav-tab tab-solo-archivo" data-tab="devoluciones" onclick="cambiarTab('devoluciones')"
-        style="display:none;">
-        📥 Devoluciones <span class="nav-badge" id="badge-devoluciones" style="display:none;">0</span>
-      </button>
-
-      <!-- Solo ACTIVO -->
-      <button class="nav-tab tab-solo-activo" data-tab="mis-prestamos" onclick="cambiarTab('mis-prestamos')"
-        style="display:none;">📋 Mis Préstamos</button>
-      <button class="nav-tab tab-solo-activo" data-tab="nuevo-expediente" onclick="cambiarTab('nuevo-expediente')"
-        style="display:none;">➕ Nuevo Expediente</button>
-
-      <!-- Ambos -->
-      <button class="nav-tab" data-tab="remisiones" onclick="cambiarTab('remisiones')">📨 Remisiones</button>
-      <button class="nav-tab" data-tab="historial" onclick="cambiarTab('historial')">🕒 Historial</button>
-      <button class="nav-tab" data-tab="reportes" onclick="cambiarTab('reportes')">📊 Reportes</button>
-    </nav>
-
-    <!-- CONTENIDO -->
-    <main class="main-content">
-
-      <!-- ========== DASHBOARD ========== -->
-      <div class="tab-content active" id="tab-dashboard">
-        <div class="stats-grid">
-          <div class="stat-card total">
-            <div class="stat-icon">📂</div>
-            <div class="stat-info">
-              <div class="numero" id="stat-total">—</div>
-              <div class="etiqueta">Total Expedientes</div>
-            </div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon">✅</div>
-            <div class="stat-info">
-              <div class="numero" id="stat-disponible">—</div>
-              <div class="etiqueta">Disponibles en Archivo</div>
-            </div>
-          </div>
-          <div class="stat-card prestado">
-            <div class="stat-icon">🔒</div>
-            <div class="stat-info">
-              <div class="numero" id="stat-prestado">—</div>
-              <div class="etiqueta">En Préstamo</div>
-            </div>
-          </div>
-          <div class="stat-card pendiente">
-            <div class="stat-icon">⏳</div>
-            <div class="stat-info">
-              <div class="numero" id="stat-pendiente">—</div>
-              <div class="etiqueta">Acciones Pendientes</div>
-            </div>
-          </div>
-          <div class="stat-card remitido">
-            <div class="stat-icon">📨</div>
-            <div class="stat-info">
-              <div class="numero" id="stat-remitido">—</div>
-              <div class="etiqueta">Remitidos</div>
-            </div>
-          </div>
+        <div class="stat-card">
+          <div class="stat-icon">🗂️</div>
+          <div class="stat-info"><div class="numero" id="stat-disponible">—</div><div class="etiqueta">En Archivo</div></div>
         </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h3>📋 Actividad Reciente</h3>
-            <button class="btn btn-secondary btn-sm" onclick="cargarDashboard()">🔄 Actualizar</button>
-          </div>
-          <div class="card-body" id="actividad-reciente">
-            <div class="loading">
-              <div class="spinner"></div> Cargando...
-            </div>
-          </div>
+        <div class="stat-card prestado">
+          <div class="stat-icon">🔒</div>
+          <div class="stat-info"><div class="numero" id="stat-prestado">—</div><div class="etiqueta">En Préstamo</div></div>
+        </div>
+        <div class="stat-card pendiente">
+          <div class="stat-icon">⏳</div>
+          <div class="stat-info"><div class="numero" id="stat-pendiente">—</div><div class="etiqueta">Acciones Pendientes</div></div>
+        </div>
+        <div class="stat-card remitido">
+          <div class="stat-icon">📨</div>
+          <div class="stat-info"><div class="numero" id="stat-remitido">—</div><div class="etiqueta">Remitidos</div></div>
         </div>
       </div>
 
-      <!-- ========== INVENTARIO ========== -->
-      <div class="tab-content" id="tab-inventario">
-        <div class="card">
-          <div class="card-header">
-            <h3>📚 Inventario de Expedientes</h3>
+      <!-- Resumen por tipo de expediente -->
+      <div class="card mb-2">
+        <div class="card-header">
+          <h3>📊 Expedientes por Tipo</h3>
+          <button class="btn btn-secondary btn-sm" onclick="cargarDashboard()">🔄 Actualizar</button>
+        </div>
+        <div class="card-body" id="stats-por-tipo">
+          <div class="loading"><div class="spinner"></div> Cargando...</div>
+        </div>
+      </div>
+
+      <!-- Actividad reciente -->
+      <div class="card">
+        <div class="card-header">
+          <h3>📋 Actividad Reciente</h3>
+        </div>
+        <div class="card-body" id="actividad-reciente">
+          <div class="loading"><div class="spinner"></div> Cargando...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== INVENTARIO ========== -->
+    <div class="tab-content" id="tab-inventario">
+      <div class="card">
+        <div class="card-header"><h3>📚 Inventario de Expedientes</h3></div>
+        <div class="card-body">
+          <div class="tipo-tabs mb-2">
+            <button class="tipo-tab active" data-tipo="solicitudes_dotacion" onclick="cargarInventario('solicitudes_dotacion')">📄 Sol. Dotación</button>
+            <button class="tipo-tab" data-tipo="autorizadas" onclick="cargarInventario('autorizadas')">✅ Autorizadas</button>
+            <button class="tipo-tab" data-tipo="adjudicaciones" onclick="cargarInventario('adjudicaciones')">🏡 Adjudicaciones</button>
+            <button class="tipo-tab" data-tipo="usufructos" onclick="cargarInventario('usufructos')">🌿 Usufructos</button>
+            <button class="tipo-tab" data-tipo="determinativas" onclick="cargarInventario('determinativas')">📋 Determinativas</button>
           </div>
+          <div class="search-bar mb-2">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="inv-search" placeholder="Buscar por código, nombre, municipio, departamento..." oninput="filtrarInventario(this.value)">
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="cargarInventario(inventarioTipoActual)">🔄 Actualizar</button>
+          </div>
+          <div class="tabla-wrap">
+            <table>
+              <thead><tr id="tabla-inventario-headers"></tr></thead>
+              <tbody id="tabla-inventario-body">
+                <tr><td colspan="9"><div class="loading"><div class="spinner"></div> Cargando...</div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SOLICITUDES (ARCHIVO) ========== -->
+    <div class="tab-content" id="tab-solicitudes-archivo">
+      <div class="card">
+        <div class="card-header">
+          <h3>📤 Solicitudes de Salida Pendientes</h3>
+          <button class="btn btn-secondary btn-sm" onclick="cargarSolicitudesArchivo()">🔄 Actualizar</button>
+        </div>
+        <div class="card-body" id="lista-solicitudes-archivo">
+          <div class="loading"><div class="spinner"></div> Cargando...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== NUEVOS EXPEDIENTES (ARCHIVO) ========== -->
+    <div class="tab-content" id="tab-nuevos-archivo">
+      <div class="card">
+        <div class="card-header">
+          <h3>📦 Nuevos Expedientes — Pendientes de Ingreso a Archivo</h3>
+          <button class="btn btn-secondary btn-sm" onclick="cargarNuevosParaArchivar()">🔄 Actualizar</button>
+        </div>
+        <div class="card-body">
+          <div class="alerta-update mb-2">
+            <span class="icon">ℹ️</span>
+            <div class="texto">Los expedientes creados por el personal activo aparecen aquí. Verifique el expediente físico y acéptelo para ingresarlo oficialmente al inventario.</div>
+          </div>
+          <div id="lista-nuevos-archivo">
+            <div class="loading"><div class="spinner"></div> Cargando...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== DEVOLUCIONES (ARCHIVO) ========== -->
+    <div class="tab-content" id="tab-devoluciones">
+      <div class="card">
+        <div class="card-header">
+          <h3>📥 Control de Devoluciones</h3>
+          <button class="btn btn-secondary btn-sm" onclick="cargarDevoluciones()">🔄 Actualizar</button>
+        </div>
+        <div class="card-body" id="lista-devoluciones">
+          <div class="loading"><div class="spinner"></div> Cargando...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== MIS SOLICITUDES (ACTIVO) ========== -->
+    <div class="tab-content" id="tab-mis-solicitudes">
+      <div class="card">
+        <div class="card-header">
+          <h3>⏳ Mis Solicitudes de Préstamo</h3>
+          <button class="btn btn-secondary btn-sm" onclick="cargarMisSolicitudes()">🔄 Actualizar</button>
+        </div>
+        <div class="card-body">
+          <div class="alerta-update mb-2">
+            <span class="icon">ℹ️</span>
+            <div class="texto">Aquí aparecen sus solicitudes de préstamo que están <strong>pendientes de aprobación</strong> por parte del personal de Archivo. Puede cancelar una solicitud si ya no la necesita.</div>
+          </div>
+          <div id="lista-mis-solicitudes">
+            <div class="loading"><div class="spinner"></div> Cargando...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== MIS PRÉSTAMOS (ACTIVO) ========== -->
+    <div class="tab-content" id="tab-mis-prestamos">
+      <div class="card">
+        <div class="card-header">
+          <h3>📋 Mis Expedientes en Préstamo</h3>
+          <button class="btn btn-secondary btn-sm" onclick="cargarMisPrestamos()">🔄 Actualizar</button>
+        </div>
+        <div class="card-body" id="lista-mis-prestamos">
+          <div class="loading"><div class="spinner"></div> Cargando...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== NUEVO EXPEDIENTE (ACTIVO) ========== -->
+    <div class="tab-content" id="tab-nuevo-expediente">
+      <div class="card">
+        <div class="card-header"><h3>➕ Registrar Nuevo Expediente</h3></div>
+        <div class="card-body">
+          <div class="alerta-update mb-2">
+            <span class="icon">📋</span>
+            <div class="texto">Al registrar un nuevo expediente, este será enviado al <strong>Personal de Archivo</strong> para su verificación e ingreso oficial. Estará disponible en el inventario una vez que Archivo lo acepte.</div>
+          </div>
+          <p class="mb-2 text-muted text-sm">Seleccione el tipo de expediente:</p>
+          <div class="tipo-tabs mb-2" id="tipo-tabs-nuevo">
+            <button class="tipo-tab active" data-tipo="solicitudes_dotacion" onclick="cambiarTipoNuevo('solicitudes_dotacion')">📄 Sol. Dotación</button>
+            <button class="tipo-tab" data-tipo="autorizadas" onclick="cambiarTipoNuevo('autorizadas')">✅ Autorizada</button>
+            <button class="tipo-tab" data-tipo="adjudicaciones" onclick="cambiarTipoNuevo('adjudicaciones')">🏡 Adjudicación</button>
+            <button class="tipo-tab" data-tipo="usufructos" onclick="cambiarTipoNuevo('usufructos')">🌿 Usufructo</button>
+            <button class="tipo-tab" data-tipo="determinativas" onclick="cambiarTipoNuevo('determinativas')">📋 Determinativa</button>
+          </div>
+          <div id="campos-nuevo-exp" data-tipo="solicitudes_dotacion"></div>
+          <div class="mt-2">
+            <button class="btn btn-primary" onclick="guardarNuevoExpediente()">📦 Registrar y Enviar a Archivo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== REMISIONES ========== -->
+    <div class="tab-content" id="tab-remisiones">
+      <div class="card">
+        <div class="card-header">
+          <h3>📨 Registro de Remisiones</h3>
+          <button class="btn btn-secondary btn-sm" onclick="cargarRemisiones()">🔄 Actualizar</button>
+        </div>
+        <div class="card-body">
+          <div class="alerta-update mb-2">
+            <span class="icon">ℹ️</span>
+            <div class="texto">
+              <strong>Personal de Archivo:</strong> puede remitir expedientes disponibles en el archivo.<br>
+              <strong>Personal Activo:</strong> puede remitir expedientes que se encuentren en su poder.<br>
+              <strong>Devolución de remisión:</strong> cuando una dirección devuelve un expediente, cualquier funcionario puede registrar la recepción con su Hoja de Ruta y Nota CITE.
+            </div>
+          </div>
+          <div class="tabla-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fecha Remisión</th><th>Tipo Exp.</th><th>Código</th><th>Nombre</th>
+                  <th>Destino</th><th>Hoja de Ruta</th><th>CITE</th>
+                  <th>Remitido por</th><th>Estado</th><th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-remisiones-body">
+                <tr><td colspan="10"><div class="loading"><div class="spinner"></div> Cargando...</div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== HISTORIAL ========== -->
+    <div class="tab-content" id="tab-historial">
+      <div class="card">
+        <div class="card-header"><h3>🕒 Historial Completo de Movimientos</h3></div>
+        <div class="card-body">
+          <div class="search-bar mb-2" style="flex-wrap:wrap;">
+            <div class="form-group" style="margin:0;min-width:150px;">
+              <label style="font-size:12px;">Desde</label>
+              <input type="date" id="hist-desde" style="padding:8px 12px;border:2px solid var(--gris-medio);border-radius:var(--radio);font-size:14px;background:var(--gris-claro);">
+            </div>
+            <div class="form-group" style="margin:0;min-width:150px;">
+              <label style="font-size:12px;">Hasta</label>
+              <input type="date" id="hist-hasta" style="padding:8px 12px;border:2px solid var(--gris-medio);border-radius:var(--radio);font-size:14px;background:var(--gris-claro);">
+            </div>
+            <div class="form-group" style="margin:0;min-width:210px;">
+              <label style="font-size:12px;">Tipo de Movimiento</label>
+              <select id="hist-tipo" style="padding:8px 12px;border:2px solid var(--gris-medio);border-radius:var(--radio);font-size:14px;background:var(--gris-claro);">
+                <option value="">Todos</option>
+                <option value="salida">Salidas autorizadas</option>
+                <option value="solicitud_salida">Solicitudes de salida</option>
+                <option value="devolucion">Devoluciones</option>
+                <option value="solicitud_devolucion">Solicitudes de devolución</option>
+                <option value="ingreso_nuevo">Nuevos expedientes</option>
+                <option value="ingreso_nuevo_aceptado">Ingresados a archivo</option>
+                <option value="remision">Remisiones</option>
+                <option value="devolucion_remision">Devolución de Remisión</option>
+              </select>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="filtrarHistorial()" style="align-self:flex-end;">🔍 Filtrar</button>
+            <button class="btn btn-secondary btn-sm" onclick="cargarHistorial()" style="align-self:flex-end;">🔄 Ver Todos</button>
+          </div>
+          <div class="tabla-wrap">
+            <table>
+              <thead><tr>
+                <th>Fecha Registro</th><th>Tipo Exp.</th><th>Código</th><th>Nombre</th>
+                <th>Solicitante</th><th>Personal Archivo</th><th>Movimiento</th>
+                <th>F. Solicitud/Salida</th><th>F. Entrega</th><th>F. Devolución/Ingreso</th>
+                <th>Cond. Salida</th><th>Cond. Retorno</th><th>Actualización</th>
+              </tr></thead>
+              <tbody id="tabla-historial-body">
+                <tr><td colspan="13"><div class="loading"><div class="spinner"></div> Cargando...</div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== REPORTES ========== -->
+    <div class="tab-content" id="tab-reportes">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;">
+        <div class="card" id="reporte-archivo-card" style="display:none;">
+          <div class="card-header"><h3>🗂️ Reportes de Archivo</h3></div>
           <div class="card-body">
-            <div class="tipo-tabs mb-2">
-              <button class="tipo-tab active" data-tipo="solicitudes_dotacion"
-                onclick="cargarInventario('solicitudes_dotacion')">📄 Solicitudes Dotación</button>
-              <button class="tipo-tab" data-tipo="autorizadas" onclick="cargarInventario('autorizadas')">✅
-                Autorizadas</button>
-              <button class="tipo-tab" data-tipo="adjudicaciones" onclick="cargarInventario('adjudicaciones')">🏡
-                Adjudicaciones</button>
-              <button class="tipo-tab" data-tipo="usufructos" onclick="cargarInventario('usufructos')">🌿
-                Usufructos</button>
-            </div>
-            <div class="search-bar mb-2">
-              <div class="search-input-wrap">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="inv-search" placeholder="Buscar por código, nombre, municipio, departamento..."
-                  oninput="filtrarInventario(this.value)">
-              </div>
-              <button class="btn btn-secondary btn-sm" onclick="cargarInventario(inventarioTipoActual)">🔄
-                Actualizar</button>
-            </div>
-            <div class="tabla-wrap">
-              <table>
-                <thead>
-                  <tr id="tabla-inventario-headers"></tr>
-                </thead>
-                <tbody id="tabla-inventario-body">
-                  <tr>
-                    <td colspan="9">
-                      <div class="loading">
-                        <div class="spinner"></div> Cargando...
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <p class="text-muted text-sm mb-2">Genere reportes de movimientos por período.</p>
+            <div class="form-group"><label>Fecha Desde</label><input type="date" id="rep-desde-arch"></div>
+            <div class="form-group"><label>Fecha Hasta</label><input type="date" id="rep-hasta-arch"></div>
+            <div class="flex gap-1 mt-2" style="flex-wrap:wrap;">
+              <button class="btn btn-primary btn-sm" onclick="generarReporte('salidas')">📤 Reporte de Salidas</button>
+              <button class="btn btn-success btn-sm" onclick="generarReporte('ingresos')">📥 Reporte de Ingresos</button>
+              <button class="btn btn-warning btn-sm" onclick="generarReporte('remisiones-rep')">📨 Reporte de Remisiones</button>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- ========== SOLICITUDES (ARCHIVO) ========== -->
-      <div class="tab-content" id="tab-solicitudes-archivo">
-        <div class="card">
-          <div class="card-header">
-            <h3>📤 Solicitudes de Salida Pendientes</h3>
-            <button class="btn btn-secondary btn-sm" onclick="cargarSolicitudesArchivo()">🔄 Actualizar</button>
-          </div>
-          <div class="card-body" id="lista-solicitudes-archivo">
-            <div class="loading">
-              <div class="spinner"></div> Cargando...
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ========== NUEVOS EXPEDIENTES (ARCHIVO) ========== -->
-      <div class="tab-content" id="tab-nuevos-archivo">
-        <div class="card">
-          <div class="card-header">
-            <h3>📦 Nuevos Expedientes — Pendientes de Ingreso a Archivo</h3>
-            <button class="btn btn-secondary btn-sm" onclick="cargarNuevosParaArchivar()">🔄 Actualizar</button>
-          </div>
+        <div class="card" id="reporte-activo-card" style="display:none;">
+          <div class="card-header"><h3>👤 Mis Movimientos</h3></div>
           <div class="card-body">
-            <div class="alerta-update mb-2">
-              <span class="icon">ℹ️</span>
-              <div class="texto">Los expedientes creados por el personal activo aparecen aquí. Verifique el expediente
-                físico y acéptelo para ingresarlo oficialmente al inventario.</div>
-            </div>
-            <div id="lista-nuevos-archivo">
-              <div class="loading">
-                <div class="spinner"></div> Cargando...
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ========== DEVOLUCIONES (ARCHIVO) ========== -->
-      <div class="tab-content" id="tab-devoluciones">
-        <div class="card">
-          <div class="card-header">
-            <h3>📥 Control de Devoluciones</h3>
-            <button class="btn btn-secondary btn-sm" onclick="cargarDevoluciones()">🔄 Actualizar</button>
-          </div>
-          <div class="card-body" id="lista-devoluciones">
-            <div class="loading">
-              <div class="spinner"></div> Cargando...
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ========== MIS PRÉSTAMOS (ACTIVO) ========== -->
-      <div class="tab-content" id="tab-mis-prestamos">
-        <div class="card">
-          <div class="card-header">
-            <h3>📋 Mis Expedientes en Préstamo</h3>
-            <button class="btn btn-secondary btn-sm" onclick="cargarMisPrestamos()">🔄 Actualizar</button>
-          </div>
-          <div class="card-body" id="lista-mis-prestamos">
-            <div class="loading">
-              <div class="spinner"></div> Cargando...
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ========== NUEVO EXPEDIENTE (ACTIVO) ========== -->
-      <div class="tab-content" id="tab-nuevo-expediente">
-        <div class="card">
-          <div class="card-header">
-            <h3>➕ Registrar Nuevo Expediente</h3>
-          </div>
-          <div class="card-body">
-            <div class="alerta-update mb-2">
-              <span class="icon">📋</span>
-              <div class="texto">Al registrar un nuevo expediente, este será enviado al <strong>Personal de
-                  Archivo</strong> para su verificación e ingreso oficial. Estará disponible en el inventario una vez
-                que Archivo lo acepte.</div>
-            </div>
-            <p class="mb-2 text-muted text-sm">Seleccione el tipo de expediente:</p>
-            <div class="tipo-tabs mb-2" id="tipo-tabs-nuevo">
-              <button class="tipo-tab active" data-tipo="solicitudes_dotacion"
-                onclick="cambiarTipoNuevo('solicitudes_dotacion')">📄 Solicitud Dotación</button>
-              <button class="tipo-tab" data-tipo="autorizadas" onclick="cambiarTipoNuevo('autorizadas')">✅
-                Autorizada</button>
-              <button class="tipo-tab" data-tipo="adjudicaciones" onclick="cambiarTipoNuevo('adjudicaciones')">🏡
-                Adjudicación</button>
-              <button class="tipo-tab" data-tipo="usufructos" onclick="cambiarTipoNuevo('usufructos')">🌿
-                Usufructo</button>
-            </div>
-            <div id="campos-nuevo-exp" data-tipo="solicitudes_dotacion"></div>
+            <p class="text-muted text-sm mb-2">Historial personal con fechas completas.</p>
+            <div class="form-group"><label>Fecha Desde</label><input type="date" id="rep-desde-act"></div>
+            <div class="form-group"><label>Fecha Hasta</label><input type="date" id="rep-hasta-act"></div>
             <div class="mt-2">
-              <button class="btn btn-primary" onclick="guardarNuevoExpediente()">📦 Registrar y Enviar a
-                Archivo</button>
+              <button class="btn btn-primary btn-sm" onclick="generarReporte('mis-movimientos')">📊 Generar Mi Reporte</button>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- ========== REMISIONES ========== -->
-      <div class="tab-content" id="tab-remisiones">
         <div class="card">
-          <div class="card-header">
-            <h3>📨 Registro de Remisiones</h3>
-            <button class="btn btn-secondary btn-sm" onclick="cargarRemisiones()">🔄 Actualizar</button>
-          </div>
+          <div class="card-header"><h3>📈 Resumen del Inventario</h3></div>
           <div class="card-body">
-            <div class="alerta-update mb-2">
-              <span class="icon">ℹ️</span>
-              <div class="texto">
-                <strong>Personal de Archivo:</strong> puede remitir expedientes que se encuentren disponibles en el
-                archivo.<br>
-                <strong>Personal Activo:</strong> puede remitir expedientes que se encuentren actualmente en su poder
-                (en préstamo).
-              </div>
-            </div>
-            <div class="tabla-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Fecha</th>
-                    <th>Tipo Exp.</th>
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Destino</th>
-                    <th>Hoja de Ruta</th>
-                    <th>CITE</th>
-                    <th>Remitido por</th>
-                    <th>Acción</th>
-                  </tr>
-                </thead>
-                <tbody id="tabla-remisiones-body">
-                  <tr>
-                    <td colspan="9">
-                      <div class="loading">
-                        <div class="spinner"></div> Cargando...
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <p class="text-muted text-sm mb-2">Estado actual consolidado de todos los expedientes.</p>
+            <div id="resumen-inventario-rep"><div class="loading"><div class="spinner"></div></div></div>
+            <div class="flex gap-1 mt-2" style="flex-wrap:wrap;">
+              <button class="btn btn-secondary btn-sm" onclick="cargarResumenReporte()">🔄 Actualizar</button>
+              <button class="btn btn-primary btn-sm" onclick="generarReporte('inventario-completo')">📄 Inventario Completo</button>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- ========== HISTORIAL ========== -->
-      <div class="tab-content" id="tab-historial">
-        <div class="card">
-          <div class="card-header">
-            <h3>🕒 Historial Completo de Movimientos</h3>
-          </div>
-          <div class="card-body">
-            <div class="search-bar mb-2" style="flex-wrap:wrap;">
-              <div class="form-group" style="margin:0;min-width:150px;">
-                <label style="font-size:12px;">Desde</label>
-                <input type="date" id="hist-desde"
-                  style="padding:8px 12px;border:2px solid var(--gris-medio);border-radius:var(--radio);font-size:14px;background:var(--gris-claro);">
-              </div>
-              <div class="form-group" style="margin:0;min-width:150px;">
-                <label style="font-size:12px;">Hasta</label>
-                <input type="date" id="hist-hasta"
-                  style="padding:8px 12px;border:2px solid var(--gris-medio);border-radius:var(--radio);font-size:14px;background:var(--gris-claro);">
-              </div>
-              <div class="form-group" style="margin:0;min-width:200px;">
-                <label style="font-size:12px;">Tipo de Movimiento</label>
-                <select id="hist-tipo"
-                  style="padding:8px 12px;border:2px solid var(--gris-medio);border-radius:var(--radio);font-size:14px;background:var(--gris-claro);">
-                  <option value="">Todos</option>
-                  <option value="salida">Salidas autorizadas</option>
-                  <option value="solicitud_salida">Solicitudes de salida</option>
-                  <option value="devolucion">Devoluciones</option>
-                  <option value="solicitud_devolucion">Solicitudes de devolución</option>
-                  <option value="ingreso_nuevo">Nuevos expedientes</option>
-                  <option value="ingreso_nuevo_aceptado">Ingresados a archivo</option>
-                  <option value="remision">Remisiones</option>
-                </select>
-              </div>
-              <button class="btn btn-primary btn-sm" onclick="filtrarHistorial()" style="align-self:flex-end;">🔍
-                Filtrar</button>
-              <button class="btn btn-secondary btn-sm" onclick="cargarHistorial()" style="align-self:flex-end;">🔄 Ver
-                Todos</button>
-            </div>
-            <div class="tabla-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Fecha Registro</th>
-                    <th>Tipo Exp.</th>
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Solicitante / Creador</th>
-                    <th>Personal Archivo</th>
-                    <th>Movimiento</th>
-                    <th>F. Solicitud/Salida</th>
-                    <th>F. Entrega</th>
-                    <th>F. Devolución/Ingreso</th>
-                    <th>Cond. Salida</th>
-                    <th>Cond. Retorno</th>
-                    <th>Actualización</th>
-                  </tr>
-                </thead>
-                <tbody id="tabla-historial-body">
-                  <tr>
-                    <td colspan="13">
-                      <div class="loading">
-                        <div class="spinner"></div> Cargando...
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ========== REPORTES ========== -->
-      <div class="tab-content" id="tab-reportes">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;">
-
-          <div class="card" id="reporte-archivo-card" style="display:none;">
-            <div class="card-header">
-              <h3>🗂️ Reportes de Archivo</h3>
-            </div>
-            <div class="card-body">
-              <p class="text-muted text-sm mb-2">Genere reportes de movimientos por período, con fechas completas de
-                solicitud, salida y devolución.</p>
-              <div class="form-group"><label>Fecha Desde</label><input type="date" id="rep-desde-arch"></div>
-              <div class="form-group"><label>Fecha Hasta</label><input type="date" id="rep-hasta-arch"></div>
-              <div class="flex gap-1 mt-2" style="flex-wrap:wrap;">
-                <button class="btn btn-primary btn-sm" onclick="generarReporte('salidas')">📤 Reporte de
-                  Salidas</button>
-                <button class="btn btn-success btn-sm" onclick="generarReporte('ingresos')">📥 Reporte de
-                  Ingresos</button>
-                <button class="btn btn-warning btn-sm" onclick="generarReporte('remisiones-rep')">📨 Reporte de
-                  Remisiones</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="card" id="reporte-activo-card" style="display:none;">
-            <div class="card-header">
-              <h3>👤 Mis Movimientos</h3>
-            </div>
-            <div class="card-body">
-              <p class="text-muted text-sm mb-2">Historial personal de expedientes solicitados, devueltos y creados, con
-                fechas completas.</p>
-              <div class="form-group"><label>Fecha Desde</label><input type="date" id="rep-desde-act"></div>
-              <div class="form-group"><label>Fecha Hasta</label><input type="date" id="rep-hasta-act"></div>
-              <div class="mt-2">
-                <button class="btn btn-primary btn-sm" onclick="generarReporte('mis-movimientos')">📊 Generar Mi
-                  Reporte</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <h3>📈 Resumen del Inventario</h3>
-            </div>
-            <div class="card-body">
-              <p class="text-muted text-sm mb-2">Estado actual consolidado de todos los expedientes.</p>
-              <div id="resumen-inventario-rep">
-                <div class="loading">
-                  <div class="spinner"></div>
-                </div>
-              </div>
-              <button class="btn btn-secondary btn-sm mt-2" onclick="cargarResumenReporte()">🔄 Actualizar</button>
-              <button class="btn btn-primary btn-sm mt-2" onclick="generarReporte('inventario-completo')">📄 Reporte
-                Inventario Completo</button>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </main>
-  </div>
-
-  <!-- ===================== MODAL DETALLE ===================== -->
-  <div class="modal-overlay" id="modal-detalle">
-    <div class="modal" style="max-width:720px;">
-      <div class="modal-header">
-        <h3 id="modal-detalle-titulo">Detalle</h3>
-        <button class="modal-close" onclick="cerrarModal('modal-detalle')">✕</button>
-      </div>
-      <div class="modal-body" id="modal-detalle-body"></div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" onclick="cerrarModal('modal-detalle')">Cerrar</button>
       </div>
     </div>
-  </div>
 
-  <!-- ===================== MODAL ACCIÓN ===================== -->
-  <div class="modal-overlay" id="modal-accion">
-    <div class="modal">
-      <div class="modal-header">
-        <h3 id="modal-accion-titulo">Acción</h3>
-        <button class="modal-close" onclick="cerrarModal('modal-accion')">✕</button>
-      </div>
-      <div class="modal-body" id="modal-accion-body"></div>
-      <div class="modal-footer" id="modal-accion-footer">
-        <button class="btn btn-secondary" onclick="cerrarModal('modal-accion')">Cancelar</button>
-      </div>
+  </main>
+</div>
+
+<!-- ===================== MODAL DETALLE ===================== -->
+<div class="modal-overlay" id="modal-detalle">
+  <div class="modal" style="max-width:720px;">
+    <div class="modal-header">
+      <h3 id="modal-detalle-titulo">Detalle</h3>
+      <button class="modal-close" onclick="cerrarModal('modal-detalle')">✕</button>
+    </div>
+    <div class="modal-body" id="modal-detalle-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="cerrarModal('modal-detalle')">Cerrar</button>
     </div>
   </div>
+</div>
 
-  <div class="notif" id="notif-container"></div>
+<!-- ===================== MODAL ACCIÓN ===================== -->
+<div class="modal-overlay" id="modal-accion">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-accion-titulo">Acción</h3>
+      <button class="modal-close" onclick="cerrarModal('modal-accion')">✕</button>
+    </div>
+    <div class="modal-body" id="modal-accion-body"></div>
+    <div class="modal-footer" id="modal-accion-footer">
+      <button class="btn btn-secondary" onclick="cerrarModal('modal-accion')">Cancelar</button>
+    </div>
+  </div>
+</div>
 
-  <!-- SCRIPTS -->
-  <script src="saaf_app.js"></script>
-  <script>
-    function cambiarLogo(input) {
-      if (!input.files || !input.files[0]) return;
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const src = e.target.result;
-        const imgH = document.getElementById('header-logo-img');
-        const emoH = document.getElementById('header-logo-emoji');
-        if (imgH) { imgH.src = src; imgH.style.display = 'block'; }
-        if (emoH) emoH.style.display = 'none';
-        const imgL = document.getElementById('logo-login-img');
-        const emoL = document.getElementById('logo-login-emoji');
-        if (imgL) { imgL.src = src; imgL.style.display = 'block'; }
-        if (emoL) emoL.style.display = 'none';
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  </script>
+<div class="notif" id="notif-container"></div>
+
+<!-- SCRIPTS -->
+<script src="saaf_app.js"></script>
+<script>
+function cambiarLogo(input) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const src = e.target.result;
+    const imgH = document.getElementById('header-logo-img');
+    const emoH = document.getElementById('header-logo-emoji');
+    if (imgH) { imgH.src = src; imgH.style.display = 'block'; }
+    if (emoH) emoH.style.display = 'none';
+    const imgL = document.getElementById('logo-login-img');
+    const emoL = document.getElementById('logo-login-emoji');
+    if (imgL) { imgL.src = src; imgL.style.display = 'block'; }
+    if (emoL) emoL.style.display = 'none';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+</script>
 </body>
-
 </html>
