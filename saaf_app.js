@@ -14,7 +14,7 @@ const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // ─── USUARIOS LOCALES ─────────────────────────
 const USUARIOS_LOCALES = [
   { id: 1, username: 'NAYDA.ALANDIA',  password: 'INRA1234', nombre_completo: 'Nayda Alandia',  tipo_usuario: 'archivo', cargo: 'Responsable de Archivo Central' },
-  { id: 2, username: 'ADRIANA.CONTRERAS',  password: 'INRA1234', nombre_completo: 'Adriana Gómez',  tipo_usuario: 'archivo', cargo: 'Auxiliar de Archivo' },
+  { id: 2, username: 'ADRIANA.CONTRERAS',  password: 'INRA1234', nombre_completo: 'Adriana Gómez',  tipo_usuario: 'activo', cargo: 'Auxiliar de Archivo' },
   { id: 3, username: 'ROMULO.CORDERO', password: 'INRA1234', nombre_completo: 'Rómulo Cordero', tipo_usuario: 'activo',  cargo: 'Técnico Jurídico' },
   { id: 4, username: 'VICTOR.CONDORI', password: 'INRA1234', nombre_completo: 'Víctor Condori', tipo_usuario: 'activo',  cargo: 'Técnico en Tierras' },
   { id: 5, username: 'ESTHER.TITO',  password: 'INRA1234', nombre_completo: 'Esther Tito',  tipo_usuario: 'archivo', cargo: 'Auxiliar de Archivo' },
